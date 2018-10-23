@@ -51,8 +51,36 @@ function prim (G, u) {
         V_T.push(v1)
         E_S.splice(i, 1)
       }
+    } else {
+      clearInterval(intervalID)
     }
-  } else {
-    clearInterval(intervalID)
+  }
+}
+
+function kruskal (G) {
+  var componentIDs = []
+  for (var v = 0; v < G.n; v++) {
+    componentIDs.push(v)
+  }
+  var E_T = []
+  var E_S = G.E
+  var n_T = 0
+  var intervalID = setInterval(() => {
+    kruskalStep()
+    drawGraph(G)
+    drawHighlights(E_T)
+  }, 500)
+
+  function kruskalStep () {
+    if (n_T < G.n) {
+      var {e, i} = E_S.min()
+      if (componentIDs[e.v1] != componentIDs[e.v2]) {
+        E_T.push(e)
+        componentIDs[e.v2] = componentIDs[e.v2]
+        E_S.splice(i, 1)
+      }
+    } else {
+      clearInterval(intervalID)
+    }
   }
 }

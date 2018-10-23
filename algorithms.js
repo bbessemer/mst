@@ -13,18 +13,19 @@ function randomGraph (n, d) {
     }
   }
 
-  E.min = () => {
-    var min = -1
-    var i = -1
+  E.min = function () {
+    var min = {w: Infinity}
+    var i = Infinity
+    console.log(this)
     for (var j = 0; j < this.length; j++) {
-      if (this[j] < min) {
+      if (this[j].w < min.w) {
         min = this[j]
         i = j
       }
     }
     return {e: min, i}
   }
-  
+
   return {n, E};
 }
 
@@ -42,7 +43,7 @@ function prim (G, u) {
   }
 
   function primStep () {
-    if (E_S.length > 0) {
+    if (V_T.length < G.n) {
       var {e, i} = E_S.min()
       if (T_S.includes(e.v1) && !T_S.includes(e.v2)) {
         E_T.push(e)

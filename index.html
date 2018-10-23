@@ -3,16 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <script type="text/javascript" src="algorithms.js"></script>
+  <script type="text/javascript" src="draw.js"></script>
 </head>
 
-<body style="background:black;">
+<body style="background:black;color:white;">
   <canvas id="canvas" width="500" height="500"
     style="float:left;margin:20px;border:1px dotted white;">
   </canvas>
   <div style="float:left;margin-top:100px;">
-    <button>Generate</button><br>
-    <button>Prim</button><br>
-    <button>Kruskal</button>
+    <input type="number" id="order" min="2" max="20" />
+    <label for="order">Number of nodes</label><br>
+    <input type="text" id="density"/>
+    <label for="density">Edge density</label><br>
+    <button onclick="generate()">Generate</button><br>
+    <button onclick="doPrim()">Prim</button><br>
+    <button onclick="doKruskal()">Kruskal</button><br>
   </div>
 </body>
 </html>

@@ -47,7 +47,6 @@ function drawGraph (G, H) {
     var {v1, v2, w} = G.E[i]
     var {x: v1x, y: v1y} = circleCoords(cx, cy, R, 2 * Math.PI * v1 / G.n)
     var {x: v2x, y: v2y} = circleCoords(cx, cy, R, 2 * Math.PI * v2 / G.n)
-    console.log(v1x, v1y, v2x, v2y)
     ctx.beginPath()
     ctx.moveTo(v1x, v1y)
     ctx.lineTo(v2x, v2y)
@@ -71,7 +70,6 @@ function drawGraph (G, H) {
       var {v1, v2, w} = H[i]
       var {x: v1x, y: v1y} = circleCoords(cx, cy, R, 2 * Math.PI * v1 / G.n)
       var {x: v2x, y: v2y} = circleCoords(cx, cy, R, 2 * Math.PI * v2 / G.n)
-      console.log(v1x, v1y, v2x, v2y)
       ctx.beginPath()
       ctx.moveTo(v1x, v1y)
       ctx.lineTo(v2x, v2y)

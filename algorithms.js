@@ -34,23 +34,21 @@ function prim (G, u) {
   var E_S = G.E
   var intervalID = setInterval(() => {
     primStep()
-    //drawGraph(G, E_T)
+    drawGraph(G, E_T)
   }, 500)
 
   function primStep () {
-    console.log(V_T)
     if (V_T.length < G.n) {
-      var {e, i} = E_S.min()
+      var {e, i} = E_S.min((e) => V_T.includes(e.v1) ^ V_T.includes(e.v2))
       if (V_T.includes(e.v1) && !V_T.includes(e.v2)) {
         E_T.push(e)
-        V_T.push(v2)
+        V_T.push(e.v2)
         E_S.splice(i, 1)
       } else if (!V_T.includes(e.v1) && V_T.includes(e.v2)) {
         E_T.push(e)
-        V_T.push(v1)
+        V_T.push(e.v1)
         E_S.splice(i, 1)
       }
-      console.log(E_T)
     } else {
       clearInterval(intervalID)
       console.log(E_T)

@@ -51,7 +51,6 @@ function prim (G, u) {
       }
     } else {
       clearInterval(intervalID)
-      console.log(E_T)
     }
   }
 }
@@ -86,7 +85,6 @@ function kruskal (G) {
       }
     } else {
       clearInterval(intervalID)
-      console.log(E_T)
     }
   }
 }

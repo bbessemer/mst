@@ -13,11 +13,11 @@ function randomGraph (n, d) {
     }
   }
 
-  E.min = function () {
+  E.min = function (P) {
     var min = {w: Infinity}
     var i = Infinity
     for (var j = 0; j < this.length; j++) {
-      if (this[j].w < min.w) {
+      if (this[j].w < min.w && P(this[j])) {
         min = this[j]
         i = j
       }
@@ -73,10 +73,16 @@ function kruskal (G) {
 
   function kruskalStep () {
     if (n_T < G.n) {
-      var {e, i} = E_S.min()
-      if (componentIDs[e.v1] != componentIDs[e.v2]) {
+      var {e, i} = E_S.min((e) => componentIDs[e.v1] != componentIDs[e.v2])
+      if (true) {
         E_T.push(e)
-        componentIDs[e.v2] = componentIDs[e.v2]
+        c1 = componentIDs[e.v1]
+        c2 = componentIDs[e.v2]
+        for (var j = 0; j < componentIDs.length; j++) {
+          if (componentIDs[j] == c2) {
+            componentIDs[j] = c1
+          }
+        }
         E_S.splice(i, 1)
         n_T++
       }

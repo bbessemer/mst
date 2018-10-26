@@ -58,3 +58,9 @@ void kruskal_step (graph_t *graph, edge_t *tree_edges, unsigned *cmp_ids,
         if (cmp_ids[j] == c2) cmp_ids[j] = c1;
     }
 }
+
+void prim_step (graph_t *graph, edge_t *tree_edges, vertex_t *tree_verts,
+    unsigned step_i)
+{
+
+}

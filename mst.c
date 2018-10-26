@@ -59,8 +59,24 @@ void kruskal_step (graph_t *graph, edge_t *tree_edges, unsigned *cmp_ids,
     }
 }
 
-void prim_step (graph_t *graph, edge_t *tree_edges, vertex_t *tree_verts,
+void prim_step (graph_t *graph, edge_t *tree_edges, char *is_in_tree,
     unsigned step_i)
 {
+    // Find the minimum edge for which the two endpoints are in separate
+    // components.
+    edge_t *min;
+    *min = (edge_t){0, 0, ~0};
+    for (size_t j = 0; j < graph->m; j++) {
+        edge_t *test = graph->edges + j;
+        if (test->w < min->w && is_in_tree[test->v1] ^ is_in_tree[test->v2]) {
+            min = test;
+        }
+    }
 
+    // Add that edge to the tree.
+    tree_edges[step_i] = *min;
+
+    // Make sure both vertices are now in the tree.
+    is_in_tree[min->v1] = 1;
+    is_in_tree[min->v2] = 1;
 }

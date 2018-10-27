@@ -109,7 +109,12 @@ void draw_circle (color_t *pixels, unsigned w, unsigned h, unsigned cx,
 static float line_distance (float x, float y, float x1, float y1,
     float x2, float y2)
 {
-    
+    if (x1 == x2) return x - x1;
+    else if (y1 == y2) return y - y1;
+    else {
+        float d = ((x2 - x1) * (y1 - y) - (x1 - x) * (y2 - y1))
+           / sqrtf((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    }
 }
 
 void draw_line (color_t *pixels, unsigned w, unsigned h, unsigned x1,

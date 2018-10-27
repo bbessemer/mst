@@ -113,14 +113,22 @@ static float line_distance (float x, float y, float x1, float y1,
     else if (y1 == y2) return y - y1;
     else {
         float d = ((x2 - x1) * (y1 - y) - (x1 - x) * (y2 - y1))
-           / sqrtf((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+            / sqrtf((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+        return (d < 0 ? -d : d);
     }
 }
 
 void draw_line (color_t *pixels, unsigned w, unsigned h, unsigned x1,
     unsigned y1, unsigned x2, unsigned y2, unsigned width, color_t color)
 {
-
+    for (unsigned y = 0; y < h; y++) {
+        unsigned offset = y * w;
+        for (unsigned x = 0; x < w; x++) {
+            if (line_distance(x, y, x1, y1, x2, y2) < width * 0.5) {
+                pixels[offset + x] = color;
+            }
+        }
+    }
 }
 
 void draw_graph (color_t *pixels, unsigned w, unsigned h, graph_t graph) {
